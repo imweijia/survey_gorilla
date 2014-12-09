@@ -1,9 +1,15 @@
-class User <ActiveRecord::Base
-  has_many :posts
-  has_many :comments
-  has_many :comment_votings
-  has_many :post_votings
+class User < ActiveRecord::Base
+  validates :email, uniqueness: true, presence: true
+  has_many :albums
+  has_many :uploads, through: :albums
 
-  validates :username, uniqueness: true, presence: true
-  validates :password, presence: true
+  def self.authenticate(email,password)
+    user = User.where(email: email).first
+
+    if user.password == password
+      user
+    else
+      nil
+    end
+  end
 end

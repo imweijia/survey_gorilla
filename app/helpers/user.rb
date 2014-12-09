@@ -1,5 +1,5 @@
 def login?
-  if session[:user].nil?
+  if session[:user_id].nil?
     false
   else
     true
@@ -7,5 +7,5 @@ def login?
 end
 
 def username
-  session[:user]
+  session[:user_id]
 end
