@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
-  validates :email, uniqueness: true, presence: true
-  has_many :albums
-  has_many :uploads, through: :albums
+  has_many :surveyvotes
+  has_many :surveys, through: :surveyvotes
 
-  def self.authenticate(email,password)
-    user = User.where(email: email).first
+
+  validates :username, uniqueness: true, presence: true
+
+  def self.authenticate(username,password)
+    user = User.where(username: username).first
 
     if user.password == password
       user
